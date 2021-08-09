@@ -1,7 +1,7 @@
 package com.dokitlist.dooyaho.domain.community.post.controller;
 
 import com.dokitlist.dooyaho.domain.community.post.req.PostCreateReq;
-import com.dokitlist.dooyaho.domain.community.post.res.PostCreateRes;
+import com.dokitlist.dooyaho.domain.community.post.res.PostResPayload;
 import com.dokitlist.dooyaho.domain.community.post.service.PostManageService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/v1/posts")
 @RestController
-public class PostController {
+public class PostManagementController {
 
     private final PostManageService postManageService;
 
     @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public PostCreateRes createPost(@RequestBody @Valid PostCreateReq req) {
+    @ResponseStatus(HttpStatus.OK)
+    public PostResPayload createPost(@RequestBody @Valid PostCreateReq req) {
         return postManageService.create(req);
     }
 
