@@ -9,8 +9,16 @@ server:
 spring:
 
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${LOCAL_DB_URL}
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+      format_sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true

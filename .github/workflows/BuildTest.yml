@@ -2,9 +2,9 @@ name: Dokitlist-backend Build & Test CI
 
 on:
   pull_request:
-    branches: [ develop, master ]
+    branches: [ dev, master ]
   push:
-    branches: [ develop, master ]
+    branches: [ dev, master ]
 
 jobs:
   build:
@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_PORT: ${{secrets.SERVER_PORT}}
+      LOCAL_DB_URL: ${{secrets.LOCAL_DB_URL}}
+      LOCAL_DB_PASSWORD: ${{secrets.LOCAL_DB_PASSWORD}}
+      LOCAL_DB_USERNAME: ${{secrets.LOCAL_DB_USERNAME}}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
