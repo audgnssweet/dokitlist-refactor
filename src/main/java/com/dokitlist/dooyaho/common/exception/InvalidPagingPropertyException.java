@@ -1,7 +1,14 @@
 package com.dokitlist.dooyaho.common.exception;
 
-import com.dokitlist.dooyaho.common.model.DokitlistException;
+import org.springframework.http.HttpStatus;
 
 public class InvalidPagingPropertyException extends DokitlistException {
 
+    public InvalidPagingPropertyException() {
+        super(
+            "Paging Property is Invalid",
+            HttpStatus.BAD_REQUEST,
+            ErrorCode.INVALID_PAGING_PROPERTY
+        );
+    }
 }

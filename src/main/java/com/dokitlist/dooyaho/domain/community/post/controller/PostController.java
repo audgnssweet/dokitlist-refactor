@@ -1,6 +1,6 @@
 package com.dokitlist.dooyaho.domain.community.post.controller;
 
-import com.dokitlist.dooyaho.common.model.Paginator;
+import com.dokitlist.dooyaho.common.model.PageRequestFactory;
 import com.dokitlist.dooyaho.domain.community.post.mapper.PostMapper;
 import com.dokitlist.dooyaho.domain.community.post.model.Post;
 import com.dokitlist.dooyaho.domain.community.post.model.PostRepository;
@@ -31,7 +31,7 @@ public class PostController {
 
     private final PostRepository postRepository;
     private final PostService postService;
-    private final Paginator paginator = Paginator.from(Post.class);
+    private final PageRequestFactory pageRequestFactory = PageRequestFactory.from(Post.class);
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.OK)
@@ -69,7 +69,7 @@ public class PostController {
         @RequestParam(name = "order", required = false) Sort.Direction direction
     ) {
         final Page<Post> res = postRepository.findAll(
-            paginator.execute(
+            pageRequestFactory.of(
                 page,
                 size,
                 property,

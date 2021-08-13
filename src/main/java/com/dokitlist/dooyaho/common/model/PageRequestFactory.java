@@ -9,15 +9,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Paginator {
+public class PageRequestFactory {
 
     private Class<? extends BaseTimeEntity> clazz;
 
-    public static Paginator from(Class<? extends BaseTimeEntity> clazz) {
-        return new Paginator(clazz);
+    public static PageRequestFactory from(Class<? extends BaseTimeEntity> clazz) {
+        return new PageRequestFactory(clazz);
     }
 
-    public PageRequest execute(Integer page, Integer size, String property, Sort.Direction direction) {
+    public PageRequest of(Integer page, Integer size, String property, Sort.Direction direction) {
         page = page == null ? 0 : page;
         size = size == null ? 15 : size;
         property = property == null ? "id" : property;
