@@ -2,9 +2,9 @@ name: Dokitlist-backend Build & Test CI
 
 on:
   pull_request:
-    branches: [ develop, master ]
+    branches: [ dev, master ]
   push:
-    branches: [ develop, master ]
+    branches: [ dev, master ]
 
 jobs:
   build:
