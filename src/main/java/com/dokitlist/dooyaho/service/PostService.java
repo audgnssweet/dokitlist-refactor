@@ -25,9 +25,8 @@ public class PostService {
 
     @Transactional
     public Post updateById(Long postId, PostReq req) {
-        final Post post = postRepository.findByIdOrFail(postId);
-        post.update(req.getTitle(), req.getContent());
-        return post;
+        final Post post = postRepository.findByIdElseError(postId);
+        return post.update(req.getTitle(), req.getContent());
     }
 
 }

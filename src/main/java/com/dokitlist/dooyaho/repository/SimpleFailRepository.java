@@ -1,20 +1,22 @@
 package com.dokitlist.dooyaho.repository;
 
+import com.dokitlist.dooyaho.exception.EntityNotFoundException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.NoRepositoryBean;
 
+@RequiredArgsConstructor
 @NoRepositoryBean
-public class SimpleFailRepository<E, ID> implements FailRepository<E, ID> {
+public abstract class SimpleFailRepository<E, ID> implements FailRepository<E, ID> {
 
     @PersistenceContext
     private EntityManager em;
 
-    Class<E> clazz;
+    private final Class<E> clazz;
 
     @Override
-    public E findByIdOrFail(ID id) {
+    public E findByIdElseError(ID id) {
         final E e = em.find(clazz, id);
         if (e == null) {
             throw new EntityNotFoundException();
@@ -23,8 +25,8 @@ public class SimpleFailRepository<E, ID> implements FailRepository<E, ID> {
     }
 
     @Override
-    public void deleteByIdOrFail(ID id) {
-        final E e = findByIdOrFail(id);
+    public void deleteByIdElseError(ID id) {
+        final E e = findByIdElseError(id);
         em.remove(e);
     }
 }

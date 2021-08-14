@@ -31,7 +31,7 @@ public class PostController {
 
     private final PostRepository postRepository;
     private final PostService postService;
-    private final PageRequestFactory pageRequestFactory = PageRequestFactory.from(Post.class);
+    private final PageRequestFactory pageRequest = PageRequestFactory.from(Post.class);
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.OK)
@@ -42,7 +42,7 @@ public class PostController {
     @GetMapping("/{post-id}")
     @ResponseStatus(HttpStatus.OK)
     public PostResPayload findById(@PathVariable(name = "post-id") Long postId) {
-        return PostMapper.INSTANCE.toResPayload(postRepository.findByIdOrFail(postId));
+        return PostMapper.INSTANCE.toResPayload(postRepository.findByIdElseError(postId));
     }
 
     @PutMapping("/{post-id}")
@@ -57,7 +57,7 @@ public class PostController {
     @DeleteMapping("/{post-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable(name = "post-id") Long postId) {
-        postRepository.deleteByIdOrFail(postId);
+        postRepository.findByIdElseError(postId);
     }
 
     @GetMapping("")
@@ -69,7 +69,7 @@ public class PostController {
         @RequestParam(name = "order", required = false) Sort.Direction direction
     ) {
         final Page<Post> res = postRepository.findAll(
-            pageRequestFactory.of(
+            pageRequest.of(
                 page,
                 size,
                 property,

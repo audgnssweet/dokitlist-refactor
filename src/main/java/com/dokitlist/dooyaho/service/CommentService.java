@@ -18,7 +18,7 @@ public class CommentService {
 
     @Transactional
     public Comment save(CommentReq req) {
-        final Post post = postRepository.findByIdOrFail(req.getPostId());
+        final Post post = postRepository.findByIdElseError(req.getPostId());
         return commentRepository.save(
             Comment.builder()
                 .content(req.getContent())
@@ -29,6 +29,6 @@ public class CommentService {
 
     @Transactional
     public Comment update(Long commentId, CommentReq req) {
-        return commentRepository.findByIdOrFail(commentId).update(req.getContent());
+        return commentRepository.findByIdElseError(commentId).update(req.getContent());
     }
 }

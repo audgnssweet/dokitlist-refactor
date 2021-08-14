@@ -35,7 +35,7 @@ public class CommentController {
     @GetMapping("/{comment-id}")
     @ResponseStatus(HttpStatus.OK)
     public CommentResPayload findById(@PathVariable(name = "comment-id") Long commentId) {
-        return CommentMapper.INSTANCE.toResPayload(commentRepository.findByIdOrFail(commentId));
+        return CommentMapper.INSTANCE.toResPayload(commentRepository.findByIdElseError(commentId));
     }
 
     @PutMapping("/{comment-id}")
@@ -50,7 +50,7 @@ public class CommentController {
     @DeleteMapping("/{comment-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable(name = "comment-id") Long commentId) {
-        commentRepository.deleteByIdOrFail(commentId);
+        commentRepository.deleteByIdElseError(commentId);
     }
 
 }
