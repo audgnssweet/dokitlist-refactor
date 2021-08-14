@@ -49,6 +49,9 @@ dependencies {
 	implementation group: 'org.mapstruct', name: 'mapstruct', version: "${mapStructVersion}"
 	annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: "${mapStructVersion}"
 
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: "${springFoxVersion}"
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: "${springFoxVersion}"
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
@@ -61,5 +64,5 @@ test {
 }
 
 clean {
-	delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성위치
+	delete file('src/main/generated')
 }
