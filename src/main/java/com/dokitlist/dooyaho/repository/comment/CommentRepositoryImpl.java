@@ -2,6 +2,7 @@ package com.dokitlist.dooyaho.repository.comment;
 
 import com.dokitlist.dooyaho.domain.comment.Comment;
 import com.dokitlist.dooyaho.domain.comment.QComment;
+import com.dokitlist.dooyaho.domain.post.QPost;
 import com.dokitlist.dooyaho.repository.SimpleFailRepository;
 import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -32,7 +33,8 @@ public class CommentRepositoryImpl extends SimpleFailRepository<Comment, Long> i
     @Override
     public Page<Comment> findAllWithPost(Pageable pageable, Long postId) {
         final JPAQuery<Comment> query = queryFactory.selectFrom(QComment.comment)
-            .where(QComment.comment.post.id.eq(postId))
+            .innerJoin(QComment.comment.post, QPost.post)
+            .on(QPost.post.id.eq(postId))
             .fetchAll();
 
         long totalElements = query.fetchCount();

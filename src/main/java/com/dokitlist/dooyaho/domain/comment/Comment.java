@@ -2,6 +2,7 @@ package com.dokitlist.dooyaho.domain.comment;
 
 import com.dokitlist.dooyaho.domain.BaseTimeEntity;
 import com.dokitlist.dooyaho.domain.post.Post;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
