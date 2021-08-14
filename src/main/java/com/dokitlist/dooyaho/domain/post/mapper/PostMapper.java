@@ -1,7 +1,7 @@
 package com.dokitlist.dooyaho.domain.post.mapper;
 
+import com.dokitlist.dooyaho.domain.PagePayload;
 import com.dokitlist.dooyaho.domain.post.Post;
-import com.dokitlist.dooyaho.domain.post.res.PostPagePayload;
 import com.dokitlist.dooyaho.domain.post.res.PostResPayload;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public interface PostMapper {
     @Mapping(target = "updatedAt", ignore = true)
     PostResPayload toResOutlinePayload(Post post);
 
-    default PostPagePayload toPagePayload(Page<Post> page) {
+    default PagePayload<PostResPayload> toPagePayload(Page<Post> page) {
         return toPagePayload(
             page.getTotalPages(),
             page.getNumberOfElements(),
@@ -29,6 +29,6 @@ public interface PostMapper {
         );
     }
 
-    PostPagePayload toPagePayload(Integer totalPages, Integer numberOfElements, List<PostResPayload> posts);
+    PagePayload<PostResPayload> toPagePayload(Integer totalPages, Integer numberOfElements, List<PostResPayload> list);
 
 }

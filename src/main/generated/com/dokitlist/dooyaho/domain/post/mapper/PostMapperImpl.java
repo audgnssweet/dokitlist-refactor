@@ -1,7 +1,7 @@
 package com.dokitlist.dooyaho.domain.post.mapper;
 
+import com.dokitlist.dooyaho.domain.PagePayload;
 import com.dokitlist.dooyaho.domain.post.Post;
-import com.dokitlist.dooyaho.domain.post.res.PostPagePayload;
 import com.dokitlist.dooyaho.domain.post.res.PostResPayload;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-08-14T18:19:00+0900",
+    date = "2021-08-14T22:09:46+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.9 (Oracle Corporation)"
 )
 public class PostMapperImpl implements PostMapper {
@@ -47,26 +47,26 @@ public class PostMapperImpl implements PostMapper {
     }
 
     @Override
-    public PostPagePayload toPagePayload(Integer totalPages, Integer numberOfElements, List<PostResPayload> posts) {
-        if ( totalPages == null && numberOfElements == null && posts == null ) {
+    public PagePayload<PostResPayload> toPagePayload(Integer totalPages, Integer numberOfElements, List<PostResPayload> list) {
+        if ( totalPages == null && numberOfElements == null && list == null ) {
             return null;
         }
 
-        PostPagePayload postPagePayload = new PostPagePayload();
+        PagePayload<PostResPayload> pagePayload = new PagePayload<PostResPayload>();
 
         if ( totalPages != null ) {
-            postPagePayload.setTotalPages( totalPages );
+            pagePayload.setTotalPages( totalPages );
         }
         if ( numberOfElements != null ) {
-            postPagePayload.setNumberOfElements( numberOfElements );
+            pagePayload.setNumberOfElements( numberOfElements );
         }
-        if ( posts != null ) {
-            List<PostResPayload> list = posts;
-            if ( list != null ) {
-                postPagePayload.setPosts( new ArrayList<PostResPayload>( list ) );
+        if ( list != null ) {
+            List<PostResPayload> list1 = list;
+            if ( list1 != null ) {
+                pagePayload.setList( new ArrayList<PostResPayload>( list1 ) );
             }
         }
 
-        return postPagePayload;
+        return pagePayload;
     }
 }

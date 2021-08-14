@@ -1,9 +1,9 @@
 package com.dokitlist.dooyaho.controller;
 
+import com.dokitlist.dooyaho.domain.PagePayload;
 import com.dokitlist.dooyaho.domain.post.Post;
 import com.dokitlist.dooyaho.domain.post.mapper.PostMapper;
 import com.dokitlist.dooyaho.domain.post.req.PostReq;
-import com.dokitlist.dooyaho.domain.post.res.PostPagePayload;
 import com.dokitlist.dooyaho.domain.post.res.PostResPayload;
 import com.dokitlist.dooyaho.repository.PageRequestFactory;
 import com.dokitlist.dooyaho.repository.post.PostRepository;
@@ -62,7 +62,7 @@ public class PostController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public PostPagePayload findAll(
+    public PagePayload<PostResPayload> findAll(
         @RequestParam(name = "page", required = false) Integer page,
         @RequestParam(name = "size", required = false) Integer size,
         @RequestParam(name = "sort", required = false) String property,
